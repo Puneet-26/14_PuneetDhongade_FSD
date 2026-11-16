@@ -13,8 +13,8 @@ services:
       - key: PORT
         value: 10000
       - key: MONGO_URI
-        sync: false
+        value: mongodb+srv://puneetsdhongade2006_db_user:erSM73wx0qFZ9BE9@cluster0.iv5zgll.mongodb.net/bus_pass_db?retryWrites=true&w=majority
       - key: JWT_SECRET
         generateValue: true
       - key: CLIENT_URL
-        sync: false
+        value: https://frontend-orcin-seven-43.vercel.app
