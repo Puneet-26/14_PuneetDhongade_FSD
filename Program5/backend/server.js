@@ -20,7 +20,7 @@ const MONGO_URI = process.env.MONGO_URI;
 
 // Middleware
 app.use(cors({
-  origin: '*', // Allows Vercel frontend or local development
+  origin: process.env.CLIENT_URL || true, // Dynamically allows Vercel frontend or local development
   credentials: true
 }));
 app.use(express.json());
