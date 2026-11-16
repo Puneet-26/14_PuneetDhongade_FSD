@@ -1,0 +1,13 @@
+{
+  "name": "program3-nodejs-core-bus-pass",
+  "version": "1.0.0",
+  "description": "Core Node.js Bus Pass Management Server Utility without Express - Roll 14 Puneet Dhongade",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test_client.js"
+  },
+  "keywords": ["nodejs", "http", "fs", "path", "events", "fs-streams"],
+  "author": "Puneet Dhongade (Roll 14)"
+}
+

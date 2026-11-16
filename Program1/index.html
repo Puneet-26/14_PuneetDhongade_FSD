@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bus Pass Management System | Roll 14 - Puneet Dhongade</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Academic Top Banner -->
+  <header class="academic-banner">
+    <div class="banner-content">
+      <div class="student-info">
+        <span class="badge roll">Roll No: 14</span>
+        <span class="student-name">Puneet Dhongade</span>
+        <span class="dept">B.Tech (AI & DS) — Semester V</span>
+      </div>
+      <div class="course-info">
+        <span class="badge course">Full Stack Development</span>
+        <span class="co-badge">CO1 & CO2</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Wrapper -->
+  <main class="app-container">
+    <!-- App Header -->
+    <section class="app-header">
+      <div class="brand">
+        <div class="brand-icon">🚌</div>
+        <div>
+          <h1>Mumbai Metropolitan Bus Pass Management System</h1>
+          <p class="subtitle">Program 1: Dynamic Web Interface with DOM Manipulation & Fetch API</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="refreshBtn" class="btn btn-outline" title="Reload from JSON / Reset">
+          🔄 Reload Passes
+        </button>
+      </div>
+    </section>
+
+    <!-- Metrics Row -->
+    <section class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-icon blue">🎫</div>
+        <div class="metric-data">
+          <span class="metric-label">Total Passes</span>
+          <span id="metricTotal" class="metric-value">0</span>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon green">🎓</div>
+        <div class="metric-data">
+          <span class="metric-label">Student Passes</span>
+          <span id="metricStudent" class="metric-value">0</span>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon purple">📅</div>
+        <div class="metric-data">
+          <span class="metric-label">Monthly Passes</span>
+          <span id="metricMonthly" class="metric-value">0</span>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon orange">₹</div>
+        <div class="metric-data">
+          <span class="metric-label">Total Fare Value</span>
+          <span id="metricFare" class="metric-value">₹0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Layout Grid: Form (Left) & Passes List (Right) -->
+    <div class="content-grid">
+      <!-- Pass Application Form -->
+      <section class="card form-card">
+        <div class="card-header">
+          <h2>Apply for New Bus Pass</h2>
+          <p>Fill out the required passenger and route details</p>
+        </div>
+
+        <form id="passForm" novalidate>
+          <!-- Passenger Name -->
+          <div class="form-group">
+            <label for="passengerName">Passenger Full Name <span class="required">*</span></label>
+            <input
+              type="text"
+              id="passengerName"
+              name="passengerName"
+              placeholder="e.g. Puneet Dhongade"
+              autocomplete="off"
+            />
+            <span class="error-msg" id="nameError"></span>
+          </div>
+
+          <!-- Bus Route -->
+          <div class="form-group">
+            <label for="routeSelect">Mumbai Route <span class="required">*</span></label>
+            <select id="routeSelect" name="routeSelect">
+              <option value="">-- Select a Mumbai Metropolitan Route --</option>
+              <option value="Andheri Station (W) to Bandra Kurla Complex (BKC)">Andheri (W) ⇄ BKC (Via WEH)</option>
+              <option value="Thane Station to CSMT (Fort)">Thane Station ⇄ CSMT (Via Eastern Express)</option>
+              <option value="Borivali (E) to Dadar TT Circle">Borivali (E) ⇄ Dadar TT Circle (Express)</option>
+              <option value="Kurla West to Vashi Bus Depot">Kurla (W) ⇄ Vashi Depot (Navi Mumbai Link)</option>
+              <option value="Ghatkopar Station (E) to Powai Hiranandani">Ghatkopar (E) ⇄ Powai Hiranandani</option>
+              <option value="custom">-- Enter Custom Route --</option>
+            </select>
+            <span class="error-msg" id="routeError"></span>
+          </div>
+
+          <!-- Custom Route Input (hidden by default) -->
+          <div class="form-group hidden" id="customRouteGroup">
+            <label for="customRoute">Custom Route Description <span class="required">*</span></label>
+            <input
+              type="text"
+              id="customRoute"
+              name="customRoute"
+              placeholder="e.g. Borivali to Churchgate"
+            />
+            <span class="error-msg" id="customRouteError"></span>
+          </div>
+
+          <!-- Pass Type & Validity (Row) -->
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label for="passType">Pass Category <span class="required">*</span></label>
+              <select id="passType" name="passType">
+                <option value="Student">Student (50% Concession)</option>
+                <option value="Monthly" selected>Monthly Standard</option>
+                <option value="Senior Citizen">Senior Citizen (40% Off)</option>
+              </select>
+            </div>
+
+            <div class="form-group col-half">
+              <label for="validityDays">Validity Period <span class="required">*</span></label>
+              <select id="validityDays" name="validityDays">
+                <option value="30">30 Days (1 Month)</option>
+                <option value="60">60 Days (2 Months)</option>
+                <option value="90">90 Days (Quarterly)</option>
+                <option value="180">180 Days (Half-Yearly)</option>
+                <option value="365">365 Days (Annual)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Live Fare Preview -->
+          <div class="fare-preview-box">
+            <div class="fare-details">
+              <span>Estimated Pass Fare:</span>
+              <strong id="fareEstimate">₹750</strong>
+            </div>
+            <small class="fare-note" id="fareNote">Standard monthly tariff applied.</small>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              💳 Issue Digital Pass
+            </button>
+            <button type="reset" class="btn btn-secondary" id="resetBtn">
+              Clear
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Passes Listing & Filters -->
+      <section class="card list-card">
+        <div class="card-header list-header">
+          <div>
+            <h2>Active Issued Passes</h2>
+            <p>Live search, filter by category, and manage records</p>
+          </div>
+          <span class="active-count" id="activeCountBadge">0 Passes</span>
+        </div>
+
+        <!-- Filter & Search Toolbar -->
+        <div class="filter-toolbar">
+          <div class="search-input-wrapper">
+            <span class="search-icon">🔍</span>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search by passenger name or route..."
+            />
+            <button id="clearSearchBtn" class="clear-search-btn hidden" title="Clear search">&times;</button>
+          </div>
+
+          <div class="filter-select-wrapper">
+            <label for="filterType" class="sr-only">Filter by type</label>
+            <select id="filterType">
+              <option value="ALL">All Categories</option>
+              <option value="Student">Student Only</option>
+              <option value="Monthly">Monthly Only</option>
+              <option value="Senior Citizen">Senior Citizen Only</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Passes Container (Grid of Cards) -->
+        <div id="passesContainer" class="passes-grid">
+          <!-- Dynamic cards injected here by script.js -->
+        </div>
+
+        <!-- Empty State Message -->
+        <div id="emptyState" class="empty-state hidden">
+          <div class="empty-icon">🎫</div>
+          <h3>No Passes Found</h3>
+          <p>No bus passes match your search or filter criteria. Try clearing filters or issue a new pass.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- HTTP Request / Response Activity Console (Satisfies HTTP Method demonstration requirement) -->
+    <section class="card console-card">
+      <div class="console-header">
+        <div class="console-title">
+          <span class="status-dot"></span>
+          <h3>Simulated HTTP Request / Response Activity Console</h3>
+        </div>
+        <div class="console-meta">
+          <span>Fetch API & Async/Await Stream Monitor</span>
+          <button id="clearConsoleBtn" class="btn btn-small">Clear Logs</button>
+        </div>
+      </div>
+      <div id="consoleLogs" class="console-body">
+        <!-- Log entries dynamically appended here -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>
+      Department of Artificial Intelligence & Data Science | Semester V | Full Stack Development Course Exercise
+    </p>
+    <p class="copyright">Developed by Puneet Dhongade (Roll No. 14) &copy; 2026</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

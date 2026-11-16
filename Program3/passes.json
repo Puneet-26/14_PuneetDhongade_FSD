@@ -1,0 +1,46 @@
+[
+  {
+    "id": "BP-N101",
+    "passengerName": "Puneet Dhongade",
+    "route": "Andheri Station (W) to Bandra Kurla Complex (BKC)",
+    "passType": "Student",
+    "validityDays": 90,
+    "issueDate": "2026-11-01",
+    "expiryDate": "2027-01-30",
+    "status": "Active",
+    "price": 450
+  },
+  {
+    "id": "BP-N102",
+    "passengerName": "Aarav Mehta",
+    "route": "Thane Station to CSMT (Fort)",
+    "passType": "Monthly",
+    "validityDays": 30,
+    "issueDate": "2026-11-05",
+    "expiryDate": "2026-12-05",
+    "status": "Active",
+    "price": 750
+  },
+  {
+    "id": "BP-N103",
+    "passengerName": "Sunita Patil",
+    "route": "Borivali (E) to Dadar TT Circle",
+    "passType": "Senior Citizen",
+    "validityDays": 180,
+    "issueDate": "2026-10-15",
+    "expiryDate": "2027-04-13",
+    "status": "Active",
+    "price": 600
+  },
+  {
+    "id": "BP-N5724",
+    "passengerName": "Puneet Dhongade",
+    "route": "Andheri Station (W) to Bandra Kurla Complex (BKC)",
+    "passType": "Student",
+    "validityDays": 90,
+    "issueDate": "2026-11-14",
+    "expiryDate": "2027-02-12",
+    "status": "Active",
+    "price": 1125
+  }
+]
